@@ -116,6 +116,7 @@ body {
 .scale-1\.05 { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
 
 /* Color Classes */
+.bg-transparent { background-color: transparent; }
 .bg-background { background-color: hsl(var(--background)); }
 .bg-primary { background-color: hsl(var(--primary)); }
 .bg-secondary { background-color: hsl(var(--secondary)); }
