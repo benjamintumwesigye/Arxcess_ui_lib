@@ -1,2 +1,151 @@
-<app-nx-welcome></app-nx-welcome>
+<div class="min-h-screen bg-background text-foreground">
+  <div class="container mx-auto p-8 space-y-8">
+    <header class="text-center space-y-4">
+      <div class="flex justify-between items-center">
+        <div></div>
+        <div class="flex items-center gap-2">
+          <span class="text-sm text-muted-foreground">Light</span>
+          <button 
+            (click)="toggleTheme()" 
+            class="theme-toggle relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            [class]="isDark ? 'bg-primary' : 'bg-muted'">
+            <span 
+              class="inline-block h-4 w-4 transform rounded-full bg-background transition-transform"
+              [class]="isDark ? 'translate-x-6' : 'translate-x-1'">
+            </span>
+          </button>
+          <span class="text-sm text-muted-foreground">Dark</span>
+        </div>
+      </div>
+      <h1 class="text-4xl font-bold">{{ title }}</h1>
+      <p class="text-muted-foreground text-lg">
+        A shadcn-inspired Angular UI library with complete theme system
+      </p>
+    </header>
+
+    <!-- Button Showcase -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Buttons</h2>
+      <div class="flex flex-wrap gap-4">
+        <ui-button>Default</ui-button>
+        <ui-button variant="destructive">Destructive</ui-button>
+        <ui-button variant="outline">Outline</ui-button>
+        <ui-button variant="secondary">Secondary</ui-button>
+        <ui-button variant="ghost">Ghost</ui-button>
+        <ui-button variant="link">Link</ui-button>
+      </div>
+      
+      <div class="flex flex-wrap gap-4">
+        <ui-button size="sm">Small</ui-button>
+        <ui-button size="default">Default</ui-button>
+        <ui-button size="lg">Large</ui-button>
+        <ui-button size="icon">🚀</ui-button>
+      </div>
+      
+      <div class="flex flex-wrap gap-4">
+        <ui-button [loading]="true">Loading</ui-button>
+        <ui-button [disabled]="true">Disabled</ui-button>
+      </div>
+    </section>
+
+    <!-- Input Showcase -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Inputs</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+        <div class="space-y-2">
+          <label class="text-sm font-medium">Default Input</label>
+          <ui-input placeholder="Enter text..." />
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium">Disabled Input</label>
+          <ui-input placeholder="Disabled input" [disabled]="true" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium">Invalid Input</label>
+          <ui-input placeholder="Invalid input" [invalid]="true" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-sm font-medium">Password Input</label>
+          <ui-input type="password" placeholder="Enter password" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Showcase -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Modal</h2>
+      <div class="flex gap-4">
+        <ui-button (click)="modal.open()">Open Modal</ui-button>
+        <ui-button variant="outline" (click)="modal2.open()">Open Large Modal</ui-button>
+      </div>
+      
+      <ui-modal #modal title="Demo Modal">
+        <p class="text-muted-foreground mb-4">
+          This is a modal dialog built with Angular CDK and styled with shadcn theme.
+        </p>
+        <div class="flex justify-end gap-2">
+          <ui-button variant="outline" (click)="modal.close()">Cancel</ui-button>
+          <ui-button (click)="modal.close()">Confirm</ui-button>
+        </div>
+      </ui-modal>
+
+      <ui-modal #modal2 title="Large Modal Demo Modal">
+        <div class="space-y-4">
+          <p class="text-muted-foreground">
+            This is a larger modal to demonstrate the responsive design.
+          </p>
+          <p class="text-muted-foreground">
+            This is a modal dialog built with Angular CDK and styled with shadcn theme.
+          </p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <label class="text-sm font-medium">First name</label>
+              <ui-input placeholder="First name" />
+            </div>
+            <div class="space-y-2">
+              <label class="text-sm font-medium">Last name</label>
+              <ui-input placeholder="Last name" />
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="text-sm font-medium">Email address</label>
+            <ui-input placeholder="Email address" />
+          </div>
+          <div class="flex justify-end gap-2">
+            <ui-button variant="outline" (click)="modal2.close()">Cancel</ui-button>
+            <ui-button (click)="modal2.close()">Save</ui-button>
+          </div>
+        </div>
+      </ui-modal>
+    </section>
+
+    <!-- Theme Colors Showcase -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Theme Colors</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="space-y-2">
+          <div class="h-16 bg-primary rounded-md flex items-center justify-center text-primary-foreground font-medium">
+            Primary
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-16 bg-secondary rounded-md flex items-center justify-center text-secondary-foreground font-medium">
+            Secondary
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-16 bg-destructive rounded-md flex items-center justify-center text-destructive-foreground font-medium">
+            Destructive
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-16 bg-muted rounded-md flex items-center justify-center text-muted-foreground font-medium">
+            Muted
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
 <router-outlet></router-outlet>
