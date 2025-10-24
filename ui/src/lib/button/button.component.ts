@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '../utils';
 
@@ -40,13 +40,18 @@ type ButtonProps = VariantProps<typeof buttonVariants>;
     <button 
       [type]="type" 
       [disabled]="disabled || loading" 
-      [class]="classes"
+      [class]="getClasses()"
       [attr.aria-disabled]="disabled || loading"
       (click)="onClick.emit($event)"
       (blur)="onBlur.emit($event)">
       <ng-content />
     </button>
-  `
+  `,
+  styles: [`
+    :host {
+      display: inline-block;
+    }
+  `]
 })
 export class ButtonComponent {
   @Input() variant: ButtonProps['variant'] = 'default';
@@ -54,15 +59,15 @@ export class ButtonComponent {
   @Input() disabled = false;
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() loading = false;
-  
+
   @Output() onClick = new EventEmitter<MouseEvent>();
   @Output() onBlur = new EventEmitter<FocusEvent>();
 
-  @HostBinding('class') get classes() {
+  getClasses(): string {
     return cn(
-      buttonVariants({ 
-        variant: this.variant, 
-        size: this.size 
+      buttonVariants({
+        variant: this.variant,
+        size: this.size
       }),
       this.loading && 'opacity-50 cursor-not-allowed'
     );

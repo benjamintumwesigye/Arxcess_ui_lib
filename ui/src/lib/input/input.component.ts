@@ -1,4 +1,4 @@
-import { Component, Input, HostBinding, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cn } from '../utils';
 
@@ -10,7 +10,7 @@ import { cn } from '../utils';
       [type]="type"
       [placeholder]="placeholder"
       [disabled]="disabled"
-      [class]="classes"
+      [class]="getClasses()"
       [value]="value"
       (input)="onInput($event)"
       (blur)="onBlur()"
@@ -25,7 +25,12 @@ import { cn } from '../utils';
       useExisting: forwardRef(() => InputComponent),
       multi: true
     }
-  ]
+  ],
+  styles: [`
+    :host {
+      display: block;
+    }
+  `]
 })
 export class InputComponent implements ControlValueAccessor {
   @Input() type: string = 'text';
@@ -35,10 +40,10 @@ export class InputComponent implements ControlValueAccessor {
   @Input() describedBy: string | null = null;
 
   value: string = '';
-  private onChange = (value: string) => {};
-  private onTouched = () => {};
+  private onChange = (value: string) => { };
+  private onTouched = () => { };
 
-  @HostBinding('class') get classes() {
+  getClasses(): string {
     return cn(
       "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
       this.invalid && "border-destructive focus-visible:ring-destructive"
