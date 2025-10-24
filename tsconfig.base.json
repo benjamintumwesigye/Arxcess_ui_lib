@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@arxcess/ui": ["ui/src/index.ts", "dist/ui/index.d.ts"]
+      "@arxcess/ui": ["ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
